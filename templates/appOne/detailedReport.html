@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Result Brief</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static "css/mystyle.css"%}"/>
+		<link rel="stylesheet" href="{% static "css/resultsPage.css"%}"/>
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<ul class="nav nav-pills">
+				  <li class="active"><a href="http://127.0.0.1:8000/">Home</a></li>
+				  <li><a href="#">About</a></li>
+				  <li><a href="#">Contact</a></li>
+				</ul>
+
+				<h1>Groops <span class="move">get in.</span></h1>
+
+		{% if ride %}
+			{%for r in ride%}
+				<div class="well" style="width: 100%;">
+					<div class="card-body">
+						<div class="row">
+							<div class="column">
+								<p class="card-title">{{r.ride_name}}</p>
+								<p class="card-text">{{r.distance}}</p>
+								<p class="card-text">{{r.findDay}}</p>
+								<p class="card-text">{{r.pace}}</p>
+								<p class="card-text">{{r.strava_link}}</p>
+								<legend></legend>
+								<p class="card-text">{{r.contact_number}}</p>
+							</div>
+
+							<div class="column">
+								<!-- <iframe height='405' width='590' frameborder='0' allowtransparency='true' scrolling='no' src='https://www.strava.com/activities/1477390007/embed/276bc196bc6e3dd8536cf108ef591077e120d1fd'></iframe> -->
+								{% for p in place %}
+									<p class="card-text">{{p.location_name}}</p>
+								{% endfor %}
+
+								{{widget}}
+
+								{{form.media}}
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% else %}
+			<p>Sorry, you have encountered an error</p>
+		{% endif%}
+	</div>
+	</body>
+</html>

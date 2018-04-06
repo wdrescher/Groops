@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>LandPage</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="{% static "css/mystyle.css"%}"/>
+	</head>
+	<body>
+		<div class="container">
+			<div class="jumbotron">
+				<ul class="nav nav-pills">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+
+				<h1>Groops <span class="move">get in.</span></h1>
+
+
+
+				<form class="search" action="http://127.0.0.1:8000/rides/" method='get'>
+					{% csrf_token %}
+				<!-- drop down option for sport  -->
+				<p>
+					<select name="sport">
+						<option value="cycling">cycling</option>
+						<option value="running">running</option>
+					</select>
+
+
+					<!-- search location -->
+					<input type="search" placeholder="Location" name="loc_query"
+			      value='{{ query }}' required>
+					<select class="" name="radius" value="{{radius}}">
+						<option value="5">5 Miles</option>
+						<option value="10">10 Miles</option>
+						<option value="15">15 Miles</option>
+					</select>
+					<input type="submit" name="submit" value="search">
+				</p>
+			</form>
+
+			<h2>
+				Featured Rides
+			</h2>
+			{{featured}}
+		</div>
+		</div>
+	</body>
+</html>
