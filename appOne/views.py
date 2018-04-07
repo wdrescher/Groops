@@ -12,6 +12,7 @@ from math import sin, cos, sqrt, atan2, radians
 
 
 
+# Calculate the distance between two geocode coordinates
 def distance(coord1, coord2):
 	R = 6373.0
 	lat1 = radians(coord1[0])
@@ -26,6 +27,7 @@ def distance(coord1, coord2):
 	distance = R * c
 	return distance * 0.621371 # convert to miles
 
+# convert address to geo code coordinate
 def coordinates(address, api_key = None):
     url = 'https://maps.googleapis.com/maps/api/geocode/json'
 
@@ -66,6 +68,7 @@ def coordinates(address, api_key = None):
 # Create your views here.
 numFeaturedRides = 3 #Able to change this value
 
+# Standard landing page that will display to all users accessing base URL
 def index(request):
     template = 'appOne/landpage.html'
     key = Ride.objects.order_by('location')
@@ -81,6 +84,8 @@ def index(request):
     return render(request, template, context)
 
 
+
+# Redirected from the land page, this will display after a search
 def result(request):
     query = request.GET.get('loc_query').lower()
     d = request.GET.get('radius')
@@ -114,6 +119,8 @@ def result(request):
 
     return render(request, template, context)
 
+
+# Upon clicking on each of the ride briefs, the detailed view will open
 def detail(request, pk):
     template = 'appOne/detailedReport.html'
     MAP_WIDGETS = {
@@ -128,6 +135,4 @@ def detail(request, pk):
         'place': Place.objects.filter(id = pk),
         'widget': GooglePointFieldWidget
     }
-
-
     return render(request, template, context)
