@@ -13,7 +13,7 @@ from .models import Ride, Featured, Place
 from .coordinateFunctions import distance, coordinates
 
 # Create your views here.
-numFeaturedRides = 3 #Able to change this value
+
 
 # Standard landing page that will display to all users accessing base URL
 def index(request):
@@ -22,6 +22,7 @@ def index(request):
     feat = Featured.objects
 
 	# Code to display featured rides
+		# numFeaturedRides = 3 #Able to change this value
 	    # for i in range(numFeaturedRides):
 	    #     feat.insert(Featured.objects.get(f_ride_code=i))
 
@@ -54,9 +55,6 @@ def result(request):
         ride_array = [float(ride_loc.split(',')[0]), float(ride_loc.split(',')[1])]
         if ( distance(loc_array, ride_array) <= int(d)):
             rides_in_range.insert(0, r)
-
-
-
     context = {
         # 'rides': rides_in_range, temporarily out: this queryset will only contain rides that are within range
 
