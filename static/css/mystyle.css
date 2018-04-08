@@ -2,3 +2,8 @@ span.move {
 	float: right;
 	padding-right: 10%
 }
+
+button.move {
+	color: red;
+	float:right;
+}
