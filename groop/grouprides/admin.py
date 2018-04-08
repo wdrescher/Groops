@@ -1,5 +1,5 @@
 from django.contrib import admin
-from appOne.models import Ride, Featured, Place, Comment, Profile
+from .models import Ride, Featured, Place, Comment, Profile
 
 # Register your models here.
 admin.site.register(Ride)

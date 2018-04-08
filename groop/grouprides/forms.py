@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from appOne.models import Ride
+from .models import Ride
 
 class inRide(ModelForm):
     class Meta:

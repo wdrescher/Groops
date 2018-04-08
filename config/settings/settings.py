@@ -12,10 +12,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
+from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'groop/templates')
+STATIC_DIR = os.path.join(BASE_DIR, 'groop/static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticroot')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -38,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'appOne',
+    'groop.grouprides',
     'location_field.apps.DefaultConfig',
     'mapwidgets'
 ]
@@ -53,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'groop.urls'
+ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'groop.wsgi.application'
+WSGI_APPLICATION = 'config.wsgi.application'
 
 MAP_WIDGETS = {
     "GooglePointFieldWidget": (

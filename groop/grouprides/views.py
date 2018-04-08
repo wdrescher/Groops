@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 
-
 import datetime
 import operator
 
@@ -17,7 +16,7 @@ from .coordinateFunctions import distance, coordinates
 
 # Standard landing page that will display to all users accessing base URL
 def index(request):
-    template = 'appOne/landpage.html'
+    template = 'grouprides/landpage.html'
     key = Ride.objects.order_by('location')
     feat = Featured.objects
 
@@ -39,7 +38,7 @@ def index(request):
 def result(request):
     query = request.GET.get('loc_query').lower()
     d = request.GET.get('radius')
-    template = 'appOne/resultBrief.html'
+    template = 'grouprides/resultBrief.html'
 
     # Converts queried location to coordinate
     new_location = coordinates(query, 'AIzaSyAQfOibV5klraxtdVGqwlzNiZdpKPm3h-Y')
@@ -69,7 +68,7 @@ def result(request):
 
 # Upon clicking on each of the ride briefs, the detailed view will open
 def detail(request, pk):
-    template = 'appOne/detailedReport.html'
+    template = 'grouprides/detailedReport.html'
     MAP_WIDGETS = {
         "GooglePointFieldWidget": (
             ("zoom", 15),

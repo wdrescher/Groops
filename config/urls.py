@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from appOne import views
+from groop.grouprides import views
 urlpatterns = [
     path('', views.index, name='homepage'),
     path('rides/', views.result),
-    path('rides/', include('appOne.urls')),
+    path('rides/', include('groop.grouprides.urls')),
     path('admin/', admin.site.urls),
 ]
