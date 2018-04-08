@@ -21,7 +21,7 @@ from groop.communication import views as communication_views
 
 urlpatterns = [
     path('', group_views.index, name='homepage'),
-    path('rides/', include('groop.grouprides.urls')),
-    path('communication/', include('groop.communication.urls')),
+    path('rides/', include('groop.grouprides.urls'), name="rides"),
+    path('communication/', include('groop.communication.urls'), name='communication'),
     path('admin/', admin.site.urls),
 ]
