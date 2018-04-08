@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from groop.grouprides import views
+
+from groop.grouprides import views as group_views
+from groop.communication import views as communication_views
+
 urlpatterns = [
-    path('', views.index, name='homepage'),
-    path('rides/', views.result),
+    path('', group_views.index, name='homepage'),
     path('rides/', include('groop.grouprides.urls')),
+    path('communication/', include('groop.communication.urls')),
     path('admin/', admin.site.urls),
 ]

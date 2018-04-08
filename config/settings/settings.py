@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'groop.grouprides',
+    'groop.communication', 
     'location_field.apps.DefaultConfig',
     'mapwidgets'
 ]
