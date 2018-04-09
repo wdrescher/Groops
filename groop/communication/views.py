@@ -1,16 +1,13 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 
-def myview(request):
-    ...
-    return HttpResponseRedirect("/path/")
-
+from .forms import SignUpForm
 
 # Create your views here.
-def home(request, pk):
+def home(request, user):
     template = 'communication/userhome.html'
     context = {
-        'key': 'value'
+        'key': user
     }
     return render(request, template, context)
 
@@ -27,4 +24,33 @@ def index(request):
             return home(request, user.pk)
         else:
             template = 'communication/failedLogin.html'
+    return render(request, template, context)
+
+def signup(request):
+    template = 'communication/signup.html'
+    user_form = SignUpForm()
+    context = {
+        'form': user_form
+    }
+    return render(request, template, context)
+
+def create(request):
+    template ="communication/createUser.html"
+    context = {
+        'key': 'value',
+    }
+    if request.method == 'POST':
+        user_form = SignUpForm(request.POST)
+        if user_form.is_valid():
+            user = user_form.save()
+            user.refresh_from_db() #loads profile
+            user.profile.f_name = user_form.cleaned_data.get('f_name')
+            user.profile.l_name = user_form.cleaned_data.get('l_name')
+            user.save()
+            user.profile.save()
+            raw_password = user_form.cleaned_data.get('password')
+            user = authenticate(username=user.username, password=raw_password)
+            return home(request, user)
+        else:
+            user_form = SignUpForm()
     return render(request, template, context)

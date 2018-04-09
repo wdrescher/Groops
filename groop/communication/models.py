@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from groop.grouprides.models import Ride
 # Create your models here.
@@ -15,9 +17,14 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     f_name = models.CharField(max_length=50, default='test')
     l_name = models.CharField(max_length=100, default='User')
-    bio = models.TextField(max_length=500, blank=True)
+    bio = models.TextField(max_length=500, blank=True, null=True)
     friend_id = models.ForeignKey('Profile', on_delete=models.CASCADE, null=True, blank=True)
 
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+        instance.profile.save()
     def __str__(self):
         return self.l_name + ', ' + self.f_name
 

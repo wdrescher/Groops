@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
+from django.contrib.auth import login, authenticate
 
 import datetime
 import operator
@@ -20,19 +21,11 @@ def index(request):
     key = Ride.objects.order_by('location')
     feat = Featured.objects
 
-	# Code to display featured rides
-		# numFeaturedRides = 3 #Able to change this value
-	    # for i in range(numFeaturedRides):
-	    #     feat.insert(Featured.objects.get(f_ride_code=i))
-
-	    #feat.insert(Featured.objects.get(0,f_ride_code=1))
     context= {
         'rides':key,
         'featured': feat
     }
     return render(request, template, context)
-
-
 
 # Redirected from the land page, this will display after a search
 def result(request):
@@ -64,7 +57,6 @@ def result(request):
     }
 
     return render(request, template, context)
-
 
 # Upon clicking on each of the ride briefs, the detailed view will open
 def detail(request, pk):
