@@ -55,6 +55,7 @@ def create(request):
     }
     return render(request, template, context)
 
+# Unfinished and unimplemented
 def newComment(request, user, ride):
     template = ''
     form = AddComment()
