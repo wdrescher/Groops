@@ -21,7 +21,7 @@ def index(request):
         in_password = request.POST.get('password')
         user = authenticate(username=in_username, password=in_password)
         if user is not None:
-            return home(request, user.pk)
+            return home(request, user)
         else:
             template = 'communication/failedLogin.html'
     return render(request, template, context)
