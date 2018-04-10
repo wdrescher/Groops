@@ -35,10 +35,7 @@ def signup(request):
     return render(request, template, context)
 
 def create(request):
-    template ="communication/createUser.html"
-    context = {
-        'key': 'value',
-    }
+    template ="communication/signup.html"
     if request.method == 'POST':
         user_form = SignUpForm(request.POST)
         if user_form.is_valid():
@@ -53,4 +50,7 @@ def create(request):
             return home(request, user)
         else:
             user_form = SignUpForm()
+    context= {
+        'form': user_form
+    }
     return render(request, template, context)
