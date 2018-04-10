@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate
 
-from .forms import SignUpForm
+from .forms import SignUpForm, AddComment
 
 # Create your views here.
 def home(request, user):
@@ -52,5 +52,13 @@ def create(request):
             user_form = SignUpForm()
     context= {
         'form': user_form
+    }
+    return render(request, template, context)
+
+def newComment(request, user, ride):
+    template = ''
+    form = AddComment()
+    context = {
+        'commentForm': form
     }
     return render(request, template, context)

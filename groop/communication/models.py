@@ -30,7 +30,6 @@ class Profile(models.Model):
 
 #comments will be associated to one ride, with one user, both users and rides can have multiple comments
 class Comment(models.Model):
-    title = models.CharField(max_length = 100)
     body = models.CharField(max_length = 500)
     date = models.DateField()
     f_user = models.ForeignKey('Profile', on_delete=models.CASCADE, default = '1')
