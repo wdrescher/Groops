@@ -1,111 +1,29 @@
 <!DOCTYPE html>
-{% load staticfiles %}
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>LandPage</title>
+{% extends 'grouprides/base.html' %}
+	{% block body_block %}
 
-		<!-- CSS -->
-		<!-- Bootstrap 3.3.7
-		JQuery 3.3.1 -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-		<link rel="stylesheet" href="{% static "css/mystyle.css"%}"/>
-		<link rel="stylesheet" href="{% static "css/landpage.css"%}"/>
-
-		<!-- Bootstrap JavaScript -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<script type="text/javascript" src='{% static 'js/visuals.js'%}'></script>
-	</head>
-
-	<body>
-		<div class="container">
-			<div class="jumbotron">
-				<ul class="nav nav-pills">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-						<p class="navbar-text navbar-right">
-							<button type="button" class="btn btn-primary btn-l navbar-right pad" data-toggle="modal" data-target="#myModal">
-							  Login
-							</button>
-							<a href="{%url 'signup'%}">
-								<button type="button" class="btn btn-l navbar-right pad" data-toggle="modal" data-target="#SignUp">
-								  Sign up
-								</button>
-							</a>
-						</p>
-				</ul>
-
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-			  <div class="modal-dialog" role="document">
-
-			    <div class="modal-content">
-
-			      <div class="modal-header">
-							<!--Button to close the window-->
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-			        <h4 class="modal-title" id="myModalLabel">Login</h4>
-			      </div>
-
-						<form action="{% url 'user-land' %}" method="post" form='form-group'>
-				      <div class="modal-body">
-
-								<!-- form redirects to the login view -->
-
-									<label for="username">Username: </label>
-									<input class='form-control' id='username' type="text" name="username" value="">
-									{%csrf_token%}
-
-									<br/>
-
-									<label for="password">Password: </label>
-									<input class='form-control' type="password" name="password" id='password' value="">
-
-				      </div>
-
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-								<input class="btn btn-primary" type="submit" name="submit" value="Login">
-				      </div>
-
-						</form>
-			    </div>
-			  </div>
-			</div>
-
-				<h1>Groops <span class="move">get in.</span></h1>
+		<form class="search form-inline" action="http://127.0.0.1:8000/rides/" method='get'>
+				{% csrf_token %}
+			<!-- drop down option for sport  -->
+			<p>
+				<select name="sport" class='form-control'>
+					<option value="cycling">cycling</option>
+					<option value="running">running</option>
+				</select>
 
 
-
-				<form class="search form-inline" action="http://127.0.0.1:8000/rides/" method='get'>
-					{% csrf_token %}
-				<!-- drop down option for sport  -->
-				<p>
-					<select name="sport" class='form-control'>
-						<option value="cycling">cycling</option>
-						<option value="running">running</option>
-					</select>
-
-
-					<!-- search location -->
-					<input type="search" placeholder="city, state" name="loc_query" value='{{ query }}' required class='form-control'>
-					<select class="form-control" name="radius" value="{{radius}}">
-						<option value="5">5 miles</option>
-						<option value="10">10 miles</option>
-						<option value="15">15 miles</option>
-					</select>
-					<input type="submit" name="submit" value="search" class='form-control btn-primary'>
-				</p>
-			</form>
-
-			<h2>
-				Featured Rides
-			</h2>
-			{{featured}}
-		</div>
-		</div>
-	</body>
-</html>
+				<!-- search location -->
+				<input type="search" placeholder="city, state" name="loc_query" value='{{ query }}' required class='form-control'>
+				<select class="form-control" name="radius" value="{{radius}}">
+					<option value="5">5 miles</option>
+					<option value="10">10 miles</option>
+					<option value="15">15 miles</option>
+				</select>
+				<input type="submit" name="submit" value="search" class='form-control btn-primary'>
+			</p>
+		</form>
+		<h2>
+			Featured Rides
+		</h2>
+		{{featured}}
+	{% endblock %}

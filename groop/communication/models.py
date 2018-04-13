@@ -18,7 +18,7 @@ class Profile(models.Model):
     f_name = models.CharField(max_length=50, default='test')
     l_name = models.CharField(max_length=100, default='User')
     bio = models.TextField(max_length=500, blank=True, null=True)
-    friend_id = models.ForeignKey('Profile', on_delete=models.CASCADE, null=True, blank=True)
+    friend_id = models.ForeignKey('Profile', on_delete=models.CASCADE, blank=True)
 
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, created, **kwargs):
